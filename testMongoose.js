@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/testMongoose2024');
 
-var schema = mongoose.Schema({ name: String })
+var Tree = require('./models/tree.js').Tree
 
-schema.methods.meow = function(){
-    console.log(this.name + " сказал мяу")
-}
+var tree = new Tree({
+    title: "Береза",
+    nick: "bereza",
+})
 
-const Cat = mongoose.model('Cat', schema);
-
-const kitty = new Cat({ name: 'Пушок' });
-kitty.save().then(() => kitty.meow());
+tree.save();
