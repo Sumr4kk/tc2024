@@ -13,7 +13,7 @@ router.get("/:nick", async function(req, res, next) {
     console.log(trees)
     if(!trees.length) return next(new Error("Нет такого дерева в лесу"))
     var tree = trees[0];
-    res.render('tree', {
+    res.render('Forest', {
         title: tree.title,
         picture: tree.avatar,
         desc: tree.desc
