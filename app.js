@@ -3,13 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/tc2024')
+
 var session = require("express-session")
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var trees = require('./routes/trees');
+const { title } = require('process');
 
 var app = express();
 
@@ -26,18 +29,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var MongoStore = require('connect-mongo');
 app.use(session({
-secret: "Forest",
-cookie:{maxAge:60*1000},
-proxy: true,
-resave: true,
-saveUninitialized: true,
-store: MongoStore.create({mongoUrl:'mongodb://localhost/tc2024'})
+  secret: "Forest",
+  cookie:{maxAge:60*1000},
+  proxy: true,
+  resave: true,
+  saveUninitialized: true,
+  store: MongoStore.create({mongoUrl:'mongodb://localhost/tc2024'})
 }))
 
 app.use(function(req,res,next){
   req.session.counter = req.session.counter + 1 || 1
   next()
 })
+
 app.use(require("./middlewares/createMenu.js"))
 app.use(require("./middlewares/createUser.js"))
 

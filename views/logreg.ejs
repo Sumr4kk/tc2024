@@ -19,12 +19,16 @@
                     placeholder="Введите пароль"/>
             </div>
         </div>
+        <br/>
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-5">
                 <input class="btn btn-primary" type="submit"
                     value="Войти"/>
             </div>
         </div>
-        <div class="alert alert-danger">Пароль не верный</div>
+        <br/>
+        <% if(error) { %>
+            <div class="alert alert-danger"><%= error %></div>
+        <% } %> 
     </form>
 </div>
